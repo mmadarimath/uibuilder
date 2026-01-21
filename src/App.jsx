@@ -67,8 +67,10 @@ const createDefaultState = () => ({
     bgColor: '#000000',
     textColor: '#ffffff',
     text: 'Add your footer/branding.',
-    leftText: 'Brand',
-    rightText: 'All rights reserved',
+    brandName: 'Brand Name',
+    brandUrl: 'https://example.com',
+    showCopyright: true,
+    rightText: '',
     align: 'center',
     paddingY: 32,
   },
@@ -797,13 +799,23 @@ function App() {
             <div className="space-y-3 sm:space-y-4">
               <ColorPicker label="Background" value={footer.bgColor} onChange={(val) => updateState(['footer', 'bgColor'], val)} />
               <ColorPicker label="Text color" value={footer.textColor} onChange={(val) => updateState(['footer', 'textColor'], val)} />
-              <div>
-                <Label className="text-xs sm:text-sm">Left footer text</Label>
-                <Input value={footer.leftText || ''} onChange={(e) => updateState(['footer', 'leftText'], e.target.value)} className="mt-1 h-9 text-sm" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <div>
+                  <Label className="text-xs sm:text-sm">Brand name</Label>
+                  <Input value={footer.brandName || ''} onChange={(e) => updateState(['footer', 'brandName'], e.target.value)} placeholder="Company Name" className="mt-1 h-9 text-sm" />
+                </div>
+                <div>
+                  <Label className="text-xs sm:text-sm">Brand URL</Label>
+                  <Input value={footer.brandUrl || ''} onChange={(e) => updateState(['footer', 'brandUrl'], e.target.value)} placeholder="https://example.com" className="mt-1 h-9 text-sm" />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox id="showCopyright" checked={footer.showCopyright !== false} onChange={(e) => updateState(['footer', 'showCopyright'], e.target.checked)} />
+                <Label htmlFor="showCopyright" className="text-xs sm:text-sm">Show © copyright with current year</Label>
               </div>
               <div>
-                <Label className="text-xs sm:text-sm">Right footer text</Label>
-                <Input value={footer.rightText || ''} onChange={(e) => updateState(['footer', 'rightText'], e.target.value)} className="mt-1 h-9 text-sm" />
+                <Label className="text-xs sm:text-sm">Additional text (right side)</Label>
+                <Input value={footer.rightText || ''} onChange={(e) => updateState(['footer', 'rightText'], e.target.value)} placeholder="All rights reserved" className="mt-1 h-9 text-sm" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>

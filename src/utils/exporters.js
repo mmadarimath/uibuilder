@@ -269,8 +269,12 @@ export const generateLandingHtml = (state) => {
   const hasSecondary = Boolean(navbar.secondaryLogo);
   const navClass = hasSecondary ? "justify-content-between" : navJustify;
 
-  const footerLeftText = footer.leftText ?? footer.text;
+  const currentYear = new Date().getFullYear();
+  const brandName = footer.brandName || "Brand";
+  const brandUrl = footer.brandUrl || "#";
+  const showCopyright = footer.showCopyright !== false;
   const footerRightText = footer.rightText ?? "";
+  const footerLeftHtml = `${showCopyright ? `&copy; ${currentYear} ` : ""}<a href="${brandUrl}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">${brandName}</a>`;
 
   const heroButtonAlign =
     heroButton.align === "center"
@@ -475,7 +479,7 @@ export const generateLandingHtml = (state) => {
     <footer style="background:${footer.bgColor}; color:${footer.textColor || autoTextColor(footer.bgColor)}; padding:${footer.paddingY || 32}px 0; text-align:${footer.align || "center"};">
       <div class="${containerClass}">
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-          <span>${footerLeftText}</span>
+          <span>${footerLeftHtml}</span>
           ${footerRightText ? `<span style="opacity:0.8;">${footerRightText}</span>` : ""}
         </div>
       </div>

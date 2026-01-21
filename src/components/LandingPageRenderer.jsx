@@ -113,7 +113,10 @@ const LandingPageRenderer = ({ state }) => {
     const alignText = (align) => align === 'center' ? 'center' : align === 'end' ? 'right' : 'left'
     const alignFlex = (align) => align === 'center' ? 'center' : align === 'end' ? 'flex-end' : 'flex-start'
 
-    const footerLeftText = footer.leftText ?? footer.text
+    const currentYear = new Date().getFullYear()
+    const brandName = footer.brandName || 'Brand'
+    const brandUrl = footer.brandUrl || '#'
+    const showCopyright = footer.showCopyright !== false
     const footerRightText = footer.rightText ?? ''
     const navJustify = navbar.align === 'center' ? 'center' : navbar.align === 'end' ? 'flex-end' : 'flex-start'
     const hasSecondary = Boolean(navbar.secondaryLogo)
@@ -346,7 +349,10 @@ const LandingPageRenderer = ({ state }) => {
                 textAlign: alignText(footer.align),
             }}>
                 <div style={{ ...containerStyle, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-                    <span>{footerLeftText}</span>
+                    <span>
+                        {showCopyright && `© ${currentYear} `}
+                        <a href={brandUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>{brandName}</a>
+                    </span>
                     {footerRightText && <span>{footerRightText}</span>}
                 </div>
             </footer>
