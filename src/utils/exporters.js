@@ -324,6 +324,15 @@ export const generateLandingHtml = (state) => {
   body { background: ${layout.fluid ? "#ffffff" : "#f8f9fa"}; }
   .page-wrapper { background: #ffffff; ${layout.fluid ? "" : "max-width: 1400px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.05);"} }
   
+  /* Fluid container responsive padding */
+  ${
+    layout.fluid
+      ? `.container-fluid { padding-left: 5%; padding-right: 5%; }
+  @media (max-width: 768px) { .container-fluid { padding-left: 16px; padding-right: 16px; } }
+  @media (min-width: 1400px) { .container-fluid { padding-left: 8%; padding-right: 8%; } }`
+      : ""
+  }
+  
   /* Navbar */
   .navbar-custom img { max-height: 40px; width: auto; object-fit: contain; transition: transform 0.3s ease; }
   .navbar-custom img:hover { transform: scale(1.05); }
@@ -387,7 +396,7 @@ export const generateLandingHtml = (state) => {
   .content-area p { margin-bottom: 16px; }
   .content-area ul, .content-area ol { padding-left: 24px; margin-bottom: 16px; }
   .content-area li { margin-bottom: 8px; }
-  .content-area img { border-radius: 12px; margin: 16px 0; }
+  .content-area img { border-radius: 12px; margin: 16px 0; width: 100%; height: auto; }
   
   /* Footer */
   footer a { transition: opacity 0.2s ease; }
@@ -396,6 +405,16 @@ export const generateLandingHtml = (state) => {
   /* Responsive */
   @media (max-width: 991px) {
     .sticky-form { position: relative; top: 0; }
+    .hero-section h1 { font-size: 1.75rem; }
+    .hero-section p { font-size: 1rem; }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-section { padding: 40px 0 !important; }
+    .hero-section h1 { font-size: 1.5rem; }
+    .form-card { padding: 16px !important; }
+    .btn-custom { padding: 12px 24px; width: 100%; text-align: center; }
+    footer .d-flex { flex-direction: column; text-align: center; gap: 8px !important; }
   }
   </style>
 </head>
