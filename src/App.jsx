@@ -70,7 +70,8 @@ const createDefaultState = () => ({
     brandName: 'Brand Name',
     brandUrl: 'https://example.com',
     showCopyright: true,
-    rightText: '',
+    serviceProvider: 'Provider Name',
+    serviceProviderUrl: 'https://provider.com',
     align: 'center',
     paddingY: 32,
   },
@@ -799,6 +800,7 @@ function App() {
             <div className="space-y-3 sm:space-y-4">
               <ColorPicker label="Background" value={footer.bgColor} onChange={(val) => updateState(['footer', 'bgColor'], val)} />
               <ColorPicker label="Text color" value={footer.textColor} onChange={(val) => updateState(['footer', 'textColor'], val)} />
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Left side: © Year Brand Name. All rights reserved.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>
                   <Label className="text-xs sm:text-sm">Brand name</Label>
@@ -813,9 +815,16 @@ function App() {
                 <Checkbox id="showCopyright" checked={footer.showCopyright !== false} onChange={(e) => updateState(['footer', 'showCopyright'], e.target.checked)} />
                 <Label htmlFor="showCopyright" className="text-xs sm:text-sm">Show © copyright with current year</Label>
               </div>
-              <div>
-                <Label className="text-xs sm:text-sm">Additional text (right side)</Label>
-                <Input value={footer.rightText || ''} onChange={(e) => updateState(['footer', 'rightText'], e.target.value)} placeholder="All rights reserved" className="mt-1 h-9 text-sm" />
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Right side: Services rendered by: Provider Name</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <div>
+                  <Label className="text-xs sm:text-sm">Service provider name</Label>
+                  <Input value={footer.serviceProvider || ''} onChange={(e) => updateState(['footer', 'serviceProvider'], e.target.value)} placeholder="Provider Name" className="mt-1 h-9 text-sm" />
+                </div>
+                <div>
+                  <Label className="text-xs sm:text-sm">Service provider URL</Label>
+                  <Input value={footer.serviceProviderUrl || ''} onChange={(e) => updateState(['footer', 'serviceProviderUrl'], e.target.value)} placeholder="https://provider.com" className="mt-1 h-9 text-sm" />
+                </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>

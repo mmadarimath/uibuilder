@@ -117,7 +117,8 @@ const LandingPageRenderer = ({ state }) => {
     const brandName = footer.brandName || 'Brand'
     const brandUrl = footer.brandUrl || '#'
     const showCopyright = footer.showCopyright !== false
-    const footerRightText = footer.rightText ?? ''
+    const serviceProvider = footer.serviceProvider || ''
+    const serviceProviderUrl = footer.serviceProviderUrl || '#'
     const navJustify = navbar.align === 'center' ? 'center' : navbar.align === 'end' ? 'flex-end' : 'flex-start'
     const hasSecondary = Boolean(navbar.secondaryLogo)
 
@@ -352,8 +353,13 @@ const LandingPageRenderer = ({ state }) => {
                     <span>
                         {showCopyright && `© ${currentYear} `}
                         <a href={brandUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>{brandName}</a>
+                        . All rights reserved.
                     </span>
-                    {footerRightText && <span>{footerRightText}</span>}
+                    {serviceProvider && (
+                        <span>
+                            Services rendered by: <a href={serviceProviderUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>{serviceProvider}</a>
+                        </span>
+                    )}
                 </div>
             </footer>
         </div>

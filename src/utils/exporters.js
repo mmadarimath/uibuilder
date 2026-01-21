@@ -273,8 +273,12 @@ export const generateLandingHtml = (state) => {
   const brandName = footer.brandName || "Brand";
   const brandUrl = footer.brandUrl || "#";
   const showCopyright = footer.showCopyright !== false;
-  const footerRightText = footer.rightText ?? "";
-  const footerLeftHtml = `${showCopyright ? `&copy; ${currentYear} ` : ""}<a href="${brandUrl}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">${brandName}</a>`;
+  const serviceProvider = footer.serviceProvider || "";
+  const serviceProviderUrl = footer.serviceProviderUrl || "#";
+  const footerLeftHtml = `${showCopyright ? `&copy; ${currentYear} ` : ""}<a href="${brandUrl}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">${brandName}</a>. All rights reserved.`;
+  const footerRightHtml = serviceProvider
+    ? `Services rendered by: <a href="${serviceProviderUrl}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">${serviceProvider}</a>`
+    : "";
 
   const heroButtonAlign =
     heroButton.align === "center"
@@ -480,7 +484,7 @@ export const generateLandingHtml = (state) => {
       <div class="${containerClass}">
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
           <span>${footerLeftHtml}</span>
-          ${footerRightText ? `<span style="opacity:0.8;">${footerRightText}</span>` : ""}
+          ${footerRightHtml ? `<span>${footerRightHtml}</span>` : ""}
         </div>
       </div>
     </footer>
